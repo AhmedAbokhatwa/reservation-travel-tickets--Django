@@ -1,0 +1,91 @@
+{% load static %}
+ <!-- Navbar Start -->
+ <div class="container-fluid position-relative nav-bar p-0">
+    <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+            <a href="" class="navbar-brand">
+                <h1 class="m-0 text-primary"><span class="text-dark">TRAVEL</span>ER</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                 
+                    <a href="{% url 'index'%}" 
+                    {% if '/' == request.path %}
+                    class="nav-item nav-link active"
+                    {% else %}
+                    class="nav-item nav-link "
+                    {% endif %}
+                    >Home</a>
+
+                    <a href="{% url 'about' %}" 
+                    {% if 'about' in request.path %}
+                    class="nav-item nav-link active"
+                    {% else %}
+                    class="nav-item nav-link "
+                    {% endif %}
+                    >About</a>
+
+                    <a href="{% url 'service' %}" 
+                    {% if 'service' in request.path %}
+                    class="nav-item nav-link active"
+                    {% else %}
+                    class="nav-item nav-link "
+                    {% endif %}
+                    >Services</a>
+
+                    <a href="{% url 'products' %}" 
+                    {% if 'products' in request.path %}
+                    class="nav-item nav-link active"
+                    {% else %}
+                    class="nav-item nav-link "
+                    {% endif %}
+                    >Tour Packages</a>
+
+                    
+                        <div class="nav-item dropdown">
+                         <a href="{% url 'blog'%}   " class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                           <li> <a href="{% url 'blog'%}" class="dropdown-item">Blog Grid</a></li>
+                           <li><a href="{% url 'single'%}" class="dropdown-item">Blog Detail</a></li>
+                           <li> <a href="{% url 'destination'%}" class="dropdown-item">Destination</a></li>
+                           <li> <a href="{% url 'guide'%}" class="dropdown-item">Travel Guides</a></li>
+                           <li> <a href="{% url 'testimonial'%}" class="dropdown-item">Testimonial</a></li>
+                         </ul>
+                        </div>
+                        
+                   
+
+                    <div class="nav-item dropdown">
+                        <a  class="nav-link dropdown-toggle" data-toggle="dropdown">
+                         {% if request.user.is_authenticated %}
+                            welcome
+                         {% else %} 
+                            join us
+                         {% endif %} 
+                         
+                        
+                        {% if request.user.is_authenticated %}    
+                        <a href="{% url 'profile' %}" class="dropdown-item">profile({{request.user.username}})</a>
+                        <a href="{% url 'show_product_favorite'%}" class="dropdown-item">my favorites</a>
+                        <div class="drowpdown-divider"></div>
+                        <a href="{% url 'logout' %}">logout</a>
+                        {% else %} 
+                        <a href="{% url 'signin' %}" class="dropdown-item">sign in</a>
+                        <a href="{% url 'signup' %}" class="dropdown-item">signup</a>
+                        {% endif %} 
+                            
+                    </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<!-- Navbar End -->
+
+
+
