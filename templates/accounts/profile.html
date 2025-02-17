@@ -71,10 +71,41 @@
     <!-- Booking End -->
 
     <div class="res">
-        <h1>profile ({{request.user.username}})</h1>
+        <h1> My Profile ({{request.user.username}})</h1>
         <hr>
         {% if request.user.is_authenticated %}
-        <form >
+        {% comment %} <!-- hey  -----------> {% endcomment %}
+            <div class="col-lg-4">
+              <div class="card border-0">
+                  <div class="card-header bg-primary text-center p-4">
+                      <h1 class="text-white m-0">Edit Profile Now</h1>
+                  </div>
+                  <div class="card-body rounded-bottom bg-white p-5">
+                    
+                      <form>
+                          <div class="form-group">
+                              <input type="text" class="form-control p-4" placeholder="Your name" required="required" />
+                          </div>
+                          <div class="form-group">
+                              <input type="email" class="form-control p-4" placeholder="Your email" required="required" />
+                          </div>
+                          <div class="form-group">
+                              <select class="custom-select px-4" style="height: 47px;">
+                                  <option selected>Select a destination</option>
+                                  <option value="1">destination 1</option>
+                                  <option value="2">destination 1</option>
+                                  <option value="3">destination 1</option>
+                              </select>
+                          </div>
+                          <div>
+                              <button class="btn btn-primary btn-block py-3" type="submit">Sign Up Now</button>
+                          </div>
+                      </form>
+                      <!-- End Form ------------------------ -->  
+                  </div>
+              </div>
+            </div>
+        {% comment %} <form >
             <div class="col-md-6">
                 <label for="inputfirstname"><b>first name</b></label>
                 <input  type="text" placeholder="Enter first name" name="fname" value="{{fname}}">
@@ -88,14 +119,10 @@
                 <label for="address"><b>address</b></label>
                 <input  type="text" placeholder="Enter address" name="address" value="{{address}}" >
             </div>
-            <div class="col-md-6">
-                <label for="address2"><b>address2</b></label>
-                <input  type="text" placeholder="Enter address2" name="address2" value="{{address2}}" >
-            </div>
-            <div class="col-md-6">
+             <div class="col-md-6">
                 <label for="city"><b>city</b></label>
                 <input  type="text" placeholder="Enter city" name="city" value="{{city}}" >
-            </div>
+              </div>
             <div class="col-md-6">
                 <label for="state"><b>state</b></label>
                 <input  type="text" placeholder="Enter state" name="state" value="{{state}}" >
@@ -123,7 +150,7 @@
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" class="btn btn-primary" name="">save</button>
-        </form>
+        </form> {% endcomment %}
         {% else %}
         you must login <a href="{% url 'signin' %}" class="text-dark">sign in</a>
         {% endif %}
