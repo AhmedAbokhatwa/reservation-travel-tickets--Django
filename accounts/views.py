@@ -103,7 +103,7 @@ def signup(request):
                         if re.match(patt,email):
                             user=User.objects.create_user(first_name=fname,last_name=lname,email=email,username=username,password=password)
                             user.save()
-                            userprofile = UserProfile(user=user,address=address,address2=address2,city=city,state=state,zip_number=zip)
+                            userprofile = UserProfile(user=user,address=address,city=city,state=state,zip_number=zip)
                             userprofile.save()
                             #CLEAR FILEDS 
                             fname = None
@@ -147,9 +147,15 @@ def signup(request):
 
 
 def profile(request):
-    if request.method == 'POST' and 'savebtn'in request.POST:
+    # print("heloooooooooooooooooooooooooooooooooooo")
+    print("request.method ",request.method,request.user,request.user.id)
+    if request.method == 'POST' and 'savebtn' in request.POST:
+        # print("heloooooooooooooooooooooooooooooooooooo")
         if request.user is not None and request.user.id != None:
+            # print("heloooooooooooooooooooooooooooooooooooo")
+            print("userprofile ",UserProfile.objects.all())
             userprofile = UserProfile.objects.get(user=request.user)
+            print("userprofile ",userprofile)
             if request.POST['fname'] and request.POST['lname'] and request.POST['address'] and request.POST['address2'] and request.POST['city'] and request.POST['state'] and request.POST['zip'] and request.POST['email'] and request.POST['password'] and request.POST['username']:
                 request.user.first_name = request.POST['fname']
                 request.user.last_name = request.POST['lname']
@@ -172,21 +178,27 @@ def profile(request):
     else:   
         if request.user is not None:
             if request.user.id != None:   
-                userprofile = UserProfile.objects.get(user=request.user)
+              users = UserProfile.objects.filter(user=request.user)
+              print("========================================= ")
+              print(f"userprofile for {type(users)} the current {users} user\n\n\n")
 
-                context = {
-                            'fname':request.user.first_name,
-                            'lname':request.user.first_name,
-                            'address':userprofile.address,
-                            'address2':userprofile.address2,
-                            'city':userprofile.city,
-                            'state':userprofile.state,
-                            'zip':userprofile.zip_number,
-                            'user':request.user.username,
-                            'email':request.user.email,
-                            'password':request.user.password,
-                }
-                return render(request,'accounts/profile.html',context)       
+              # Loop through the filtered UserProfile queryset and print details
+              for userprofile in users:
+            
+                  print(request.user.email)
+
+                  context = {
+                              'fname':request.user.first_name,
+                              'lname':request.user.first_name,
+                              'address':userprofile.address,
+                              'city':userprofile.city,
+                              'state':userprofile.state,
+                              'zip':userprofile.zip_number,
+                              'user':request.user.username,
+                              'email':request.user.email,
+                              'password':request.user.password,
+                  }
+                  return render(request,'accounts/profile.html',context)       
         else:
            return render(request,'accounts/profile.html')
         
