@@ -1,9 +1,10 @@
 from django.urls import path
-from . import views
+from products import views
 # yout urlpatens
-
 urlpatterns =[
-    path('products',views.products,name='products'),
+    path('', views.all_products, name='products'),
+    path('pro/',views.hello,name='hello'),
     path('<int:pro_id>',views.product,name='product'),
     
 ]
+

@@ -29,5 +29,6 @@ def guide(request):
 def testimonial(request):
    return render(request,'pages/testimonial.html')         
 
-
+def hello(request):
+   return render(request)  
 

@@ -1,11 +1,18 @@
 from django.shortcuts import get_object_or_404 ,render
 from .models import Product
 # Create your views here.
+from django.http import HttpResponse
+def hello (request):
+  return HttpResponse("hello")
 
-def products(request):
+def all_products(request):
+  # return HttpResponse("helloo")
+  products = Product.objects.all()
+  print("\n\nContext: ", products)
   context ={
-     'products': Product.objects.all()
+     'products': products
   }
+  # print("\n\nContext")
   return render(request,'products/products.html',context)
 
 def product(request,pro_id):
