@@ -9,7 +9,7 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     zip_number = models.CharField(max_length=50)
-    email = models.CharField(max_length=50,default='ahmedreda199785@gmail.com')
+    email = models.CharField(max_length=50,default='test@gmail.com')
     phone_number = models.IntegerField(max_length=50)
     password = models.CharField(max_length=50, default=123456)
     
