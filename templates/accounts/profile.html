@@ -82,13 +82,40 @@
                   </div>
                   <div class="card-body rounded-bottom bg-white p-5">
                     
-                      <form>
+                      <form method ="POST">
+                      {% csrf_token %}
+                      {% if userprofiles %}
+                        {% for user_profile in userprofiles %}
                           <div class="form-group">
-                              <input type="text" class="form-control p-4" placeholder="Your name" required="required" />
+                              <input type="text" class="form-control p-4" placeholder="Your User-Name" required="required" name = "user_name" value="{{user_profile.user}}"/>
                           </div>
                           <div class="form-group">
-                              <input type="email" class="form-control p-4" placeholder="Your email" required="required" />
+                              <input type="password" class="form-control p-4" placeholder="Your password" required="required" name = "password" value = "{{use_profile.password}}" />
                           </div>
+                          <div class="form-group">
+                              <input type="email" class="form-control p-4" placeholder="Your email" required="required" name="email" value="{{user_profile.email}}" />
+                          </div>
+
+                          <div class="form-group">
+                              <input type="text" class="form-control p-4" placeholder="Your address" required="required" name="address" value = {{user_profile.address}} />
+                          </div>
+
+                          <div class="form-group">
+                              <input type="text" class="form-control p-4" placeholder="City" required="required" name="city" value = {{user_profile.city}} />
+                          </div>
+
+                          <div class="form-group">
+                              <input type="text" class="form-control p-4" placeholder="State" required="required" name="state" value = {{user_profile.state}}/>
+                          </div>
+
+                          <div class="form-group">
+                              <input type="text" class="form-control p-4" placeholder="Zip Code" required="required" name="zip" value = {{user_profile.zip_number}} />
+                          </div>
+
+                          <div class="form-group">
+                              <input type="text" class="form-control p-4" placeholder="Phone Number" required="required" name="phone" value={{user_profile.phone_number}}/>
+                          </div>
+
                           <div class="form-group">
                               <select class="custom-select px-4" style="height: 47px;">
                                   <option selected>Select a destination</option>
@@ -100,6 +127,8 @@
                           <div>
                               <button class="btn btn-primary btn-block py-3" type="submit">Sign Up Now</button>
                           </div>
+                          {% endfor %}
+                          {% endif %}
                       </form>
                       <!-- End Form ------------------------ -->  
                   </div>

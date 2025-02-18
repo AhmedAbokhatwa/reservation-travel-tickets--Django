@@ -5,6 +5,10 @@ from products.models import Product
 from django.contrib import auth
 from .models import UserProfile
 import re
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import UserProfile
+from django.contrib import messages
 
 # Create your views here.
 
@@ -148,57 +152,45 @@ def signup(request):
 
 def profile(request):
     # print("heloooooooooooooooooooooooooooooooooooo")
-    print("request.method ",request.method,request.user,request.user.id)
-    if request.method == 'POST' and 'savebtn' in request.POST:
-        # print("heloooooooooooooooooooooooooooooooooooo")
+    # print("request.method ",request,request.user,request.user.id)
+    # if request.method == 'POST' and 'savebtn' in request.POST:
+    if request.method == 'POST':
+
+        print("heloooooooooooooooooooooooooooooooooooo")
         if request.user is not None and request.user.id != None:
-            # print("heloooooooooooooooooooooooooooooooooooo")
+            print("heloooooooooooooooooooooooooooooooooooo")
             print("userprofile ",UserProfile.objects.all())
             userprofile = UserProfile.objects.get(user=request.user)
-            print("userprofile ",userprofile)
-            if request.POST['fname'] and request.POST['lname'] and request.POST['address'] and request.POST['address2'] and request.POST['city'] and request.POST['state'] and request.POST['zip'] and request.POST['email'] and request.POST['password'] and request.POST['username']:
-                request.user.first_name = request.POST['fname']
-                request.user.last_name = request.POST['lname']
-                userprofile.address = request.POST['address']
-                userprofile.address2 = request.POST['adress2']
-                userprofile.city = request.POST['city']
-                userprofile.state = request.POST['state']
-                userprofile.zip = request.POST['zip']
-                request.user.email = request.POST['email']
-                #request.user.password = request.POST['password']
-                if not request.POST['password'].startwith('pbkdf2_sha256$'):
-                   request.user.set_password(request.user.POST['pass'])
-                request.user.username = request.POST['username']
+            
+            if userprofile:
+                
+                # request.user.username = request.POST.get('username', request.user.username)
+                request.user.email = request.POST.get('email', request.user.email)
+
+                # Update the UserProfile details
+                userprofile.address = request.POST.get('address', userprofile.address)
+                userprofile.city = request.POST.get('city', userprofile.city)
+                userprofile.state = request.POST.get('state', userprofile.state)
+                userprofile.zip_number = request.POST.get('zip_number', userprofile.zip_number)
+                userprofile.save()
+                print("Doneeeeeeeeeeeeeeeeeeeeeeeeeeeeee\n\n ")
+                # new_password = request.POST.get('password', None)
+                # #request.user.password = request.POST['password']
+                # if new_password.startswith('pbkdf2_sha256$'):
+                #     request.user.set_password(new_password)
+                # else:
+                #     messages.error(request, "Password format is invalid.")
+                #     return redirect('profile')
 
 
             else:
                 messages.error(request,'errror in elements')    
-        return redirect('profile')
-    
+        return redirect('profile')    
     else:   
         if request.user is not None:
             if request.user.id != None:   
-              users = UserProfile.objects.filter(user=request.user)
-              print("========================================= ")
-              print(f"userprofile for {type(users)} the current {users} user\n\n\n")
-
-              # Loop through the filtered UserProfile queryset and print details
-              for userprofile in users:
-            
-                  print(request.user.email)
-
-                  context = {
-                              'fname':request.user.first_name,
-                              'lname':request.user.first_name,
-                              'address':userprofile.address,
-                              'city':userprofile.city,
-                              'state':userprofile.state,
-                              'zip':userprofile.zip_number,
-                              'user':request.user.username,
-                              'email':request.user.email,
-                              'password':request.user.password,
-                  }
-                  return render(request,'accounts/profile.html',context)       
+              userprofiles = UserProfile.objects.filter(user=request.user)
+              return render(request,'accounts/profile.html',{"userprofiles":userprofiles})       
         else:
            return render(request,'accounts/profile.html')
         
