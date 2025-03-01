@@ -22,6 +22,9 @@ def signin(request):
             if 'rememberme' not in request.POST:
                 request.session.set_expiry(0)
             auth.login(request,user)
+            # request.re
+            print("\n\n User is looooog")
+            return redirect('home')
             #messages.success(request,'you are login')
         else:
             messages.error(request,'you username or password is not correct')
