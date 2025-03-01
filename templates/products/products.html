@@ -30,8 +30,8 @@
                                     <select class="custom-select px-4" style="height: 47px;">
                                         <option selected>Destination</option>
                                         <option value="1">Destination 1</option>
-                                        <option value="2">Destination 1</option>
-                                        <option value="3">Destination 1</option>
+                                        <option value="2">Destination 2</option>
+                                        <option value="3">Destination 3</option>
                                     </select>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                                     <select class="custom-select px-4" style="height: 47px;">
                                         <option selected>Duration</option>
                                         <option value="1">Duration 1</option>
-                                        <option value="2">Duration 1</option>
-                                        <option value="3">Duration 1</option>
+                                        <option value="2">Duration 2</option>
+                                        <option value="3">Duration 3</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,51 +72,47 @@
 
 
     <!-- Packages Start -->
-   
+    <!-- You can add content about the packages here if needed -->
     <!-- Packages End -->
 
 
     <!-- Destination Start -->
-<div class="container-fluid py-5">
-    <div class="container pt-5 pb-3">
-        <div class="text-center mb-3 pb-3">
-            <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
-            <h1>Explore Top Destination</h1>
-        </div>
-{% for pro in products|slice:':6' %}           
- <div class="row" style="display: flex;">
-    <div class="col-lg-4 col-md-6 mb-4 " >
-        <div class="package-item bg-white mb-2" >
-            <img class="img-fluid" src="{{pro.photo.url}}" alt="">
-            <div class="p-4">
-                <div class="d-flex justify-content-between mb-3">
-                    <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{pro.name}}</small>
-                    <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
-                    <small class="m-0"><i class="fa fa-user text-primary mr-2"></i> 22 Person</small>
-                </div>
-                <a class="h5 text-decoration-none" href="">Discover amazing places of the world with us</a>
-                <div class="border-top mt-4 pt-4">
-                    <div class="d-flex justify-content-between">
-                        <a  class="m-0"><i class="fa fa-star text-primary mr-2" ></i>حجز <small>(250)</small></a>
-                        <h5 class="m-0">${{pro.price}}</h5>
-                        <a href="{% url 'product' pro_id=pro.id %}" class="text-dark">hi</a>
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
+                <h1>Explore Top Destinations</h1>
+            </div>
+            <div class="row">
+                {% for pro in products|slice:':6' %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="package-item bg-white mb-2">
+                            <img class="img-fluid" src="{{pro.photo.url}}" alt="{{pro.name}}">
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <small class="m-0"><i class="fa fa-map-marker-alt text-primary mr-2"></i>{{pro.name}}</small>
+                                    <small class="m-0"><i class="fa fa-calendar-alt text-primary mr-2"></i>3 days</small>
+                                    <small class="m-0"><i class="fa fa-user text-primary mr-2"></i>2 Person</small>
+                                </div>
+                                <a class="h5 text-decoration-none" href="{% url 'product' pro_id=pro.id %}">Discover amazing places of the world with us</a>
+                                <div class="border-top mt-4 pt-4">
+                                    <div class="d-flex justify-content-between">
+                                        <a class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></a>
+                                        <h5 class="m-0">${{pro.id}}</h5>
+                                        <a href="{% url 'product' pro_id=pro.id %}" class="text-dark">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                {% empty %}
+                    <h4 class="alert alert-warning">
+                        No products here. <a href="{% url 'products'%}" class="text-dark">View All Products</a>
+                    </h4>
+                {% endfor %}
             </div>
         </div>
     </div>
-    
-</div>
-</div>
-</div>
-    
-</div>
-{% empty %}    
- <h4 class="alert alert-warning">
-    Noproduct here <a href="{% url 'products'%}" class="text-dark">All products</a>
- </h4>    
- {% endfor %}   
-        </div>
-    </div>
-    <!-- Destination Start -->
-    {% endblock content %}
+    <!-- Destination End -->
+
+{% endblock content %}

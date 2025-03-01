@@ -3,6 +3,7 @@
 {% block title %} Packages {% endblock %}
 {% block content %}
     <!-- Header Start -->
+     hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
     <div class="container-fluid page-header">
         <div class="container">
             <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
@@ -77,10 +78,10 @@
             <div class="text-center mb-3 pb-3">
                 <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Packages</h6>
                 <h1>Pefect Tour Packages</h1>
-            </div>
-        
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="row d-flex justify-content-center align-items-center position-relative overflow-hidden mb-2">
+                <div class="col-lg-6 col-md-6 mb-5">
+                  <!-- <div class="destination-item position-relative overflow-hidden mb-2"> -->
+
                     <div class="package-item bg-white mb-2">
                         <img class="img-fluid" src="{{pro.photo.url}}" alt="">
                         <div class="p-4">
@@ -94,9 +95,9 @@
                                 <div class="d-flex justify-content-between">
                                     <a href ="service" class="btn btn-warning"> Add to cart</a>
                                     <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>
-                                    <h5 class="m-0">${{x.price}}</h5>
-                                    <h5 class="m-0">${{x.published_date}}</h5>
-                                    <h5 class="m-0">${{x.is_active}}</h5>
+                                    <h5 class="m-0">${{pro.price}}</h5>
+                            
+                                    <!-- <h5 class="m-0">${{pro.is_active}}</h5> -->
 
                                   
                                 </div>
@@ -106,6 +107,9 @@
                 </div>
                   
             </div>
+            </div>
+        
+      
           
         </div>
     </div>
@@ -113,24 +117,27 @@
 
 
     <!-- Destination Start -->
-    <div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <div class="text-center mb-3 pb-3">
-                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
-                <h1>Explore Top Destination</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="destination-item position-relative overflow-hidden mb-2">
-                        <img class="img-fluid" src="{{pro.photo.url}}" alt="">
-                        <h1>{{pro.name}}</h1>
-                            <h5 class="text-white">{{pro.price}}</h5>
-                            <span>{{pro.description}}</span>
-
-                        </a>
-                    </div>
-                </div>
-                
-    </div>
+    <!-- <div class="container-fluid py-5">
+      <div class="container pt-5 pb-3">
+          <div class="text-center mb-3 pb-3">
+              <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Destination</h6>
+              <h1>Explore Top Destination</h1>
+          </div>
+          <div class="row d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+              <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="destination-item position-relative overflow-hidden mb-2">
+                      <img class="img-fluid" src="{{pro.photo.url}}" alt="">
+                      <h1>{{pro.name}}</h1>
+                      <h5 class="text-white">{{pro.price}}</h5>
+                      <span>{{pro.description}}</span>
+                  </div>
+              </div>
+              <div class="col-12 text-center">
+                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, voluptas illum laboriosam, reiciendis deserunt rem nisi aperiam magni est commodi quibusdam, non consectetur. Illum, id culpa dicta labore magni error!</p>
+              </div>
+          </div>
+      </div>
+  </div> -->
+  
     <!-- Destination Start -->
     {% endblock content %}
